@@ -116,5 +116,19 @@ RSpec.describe CoursesController, type: :controller do
     end
    
   end
+
+  describe 'DELETE destroy' do
+    it 'deletes a record' do
+      course = create(:course)
+      delete :destroy, params: { id: course.id}
+      expect(Course.count).to be 0
+    end
+
+    it 'renders destroy template' do
+      course = create(:course)
+      delete :destroy, params: { id: course.id}
+      expect(response).to redirect_to courses_path
+    end
+  end
   
 end
